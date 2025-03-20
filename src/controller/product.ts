@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response } from "express"
 import { Product } from "../models/Product";
 import { getRatingInfo } from "../middleware/user_action/getRatingInfo";
-import { CategoriesProps, FilesProps, MyQuery, ProductBrandProps, ProductImagesProps, ProductProps } from "../types/types";
+import { CategoriesProps, FilesProps,  ProductBrandProps, ProductImagesProps, ProductProps } from "../types/types";
 import { fileRemoved } from "../middleware/helpers/fileRemover";
 import { ProductImages } from "../models/productImages";
-import { number, string } from "zod";
+
 import { Order } from "../models/Orderschema";
-import { category } from "./superadmin";
+
 import { SuggestKeyword } from "../models/suggestKeyword";
 import { Category } from "../models/Category";
 import { ProductBrand } from "../models/productBrand";
@@ -19,11 +19,6 @@ export const product =async(req:Request,res:Response,next:NextFunction)=>{
     try{
 
         const {productId}=req.body
-
-      
-       
-
-     
 
         const product = await Product.findOne({_id:productId})
         .populate("images")
@@ -70,11 +65,6 @@ export  const getProduct =async(req:Request,res:Response)=>{
         let role= req.authUser?.role ||"user"
 
         const isProduct=await Product.findOne({_id:req.product._id})
-
-        
-
-       
-
 
         if(role=="user" && (!req.product.isVerified  || req.product.isDeleted)){
 
@@ -301,7 +291,7 @@ export const productImages = async (req:Request,res:Response)=>{
 
 
     try{
-      console.log(req.files,2000)
+    
 
         if(!req.files?.length){
 
@@ -647,7 +637,7 @@ export const getProducts=async(req:Request,res:Response)=>{
 
 
         let sortFactor={}
-        console.log(createdAt)
+      
 
         if (createdAt && (createdAt === 'asc' || createdAt === 'desc')) sortFactor = { ...sortFactor, createdAt }
 
@@ -690,10 +680,7 @@ export const getProducts=async(req:Request,res:Response)=>{
         const totalCount=products.length
 
         const pagination=Math.ceil(Number(totalCount/prepage))
-        console.log(products,2000)
-
-
-
+        
         res.json({products,status:true,pagination,totalCount})
         return
 
@@ -717,7 +704,7 @@ export const getSingleProduct=async(req:Request,res:Response)=>{
 
     const {productId}=req.params
 
-    console.log(productId,500)
+  
 
     let isProduct=await Product.findOne({_id:productId})
         .populate('brand')
@@ -1041,14 +1028,14 @@ export const searchProducts=async(req:Request,res:Response)=>{
           sizes,
           ratings,
           colors,
-          warranties,
+          
           discount,
           weights,
           cat_id,
           keyword = "",
         } = req.query;
        
-        console.log(req.query,204)
+        
 
        let categories;
 
@@ -1160,7 +1147,7 @@ export const searchProducts=async(req:Request,res:Response)=>{
          .lean()
          .sort(sortFactor)
 
-         console.log( searchingFactor,'last')
+         
          
          let totalCount = await Product.countDocuments(searchingFactor);
 
