@@ -39,8 +39,8 @@ app.use('/api/dashboard', dashboardRouter_1.dashBoardRoutre);
 //     console.log(`server running on ${PORT}`)
 // })
 // Start the server locally
-if (process.env.NODE_ENV !== "production") {
-    app.listen(PORT, () => {
-        console.log(`Server running on http://localhost:${PORT}`);
-    });
-}
+// if (process.env.NODE_ENV !== "production") {
+//     app.listen(PORT, () => {
+//       console.log(`Server running on http://localhost:${PORT}`);
+//     });
+//   }
