@@ -762,7 +762,15 @@ export const isFeatureProduct=async(req:Request,res:Response)=>{
     let isProduct=await Product.find(query)
         .populate('brand')
         .populate("category")
-        .populate("soldBy")
+        
+        .populate({
+          path: "soldBy",
+          select:"name shopName address isVerified isBlocked holidayMode photo email",
+          populate: {
+            path: "adminWareHouse",
+            model: "AdminWareHouse",
+          },
+        })
         .populate("images")
 
 
