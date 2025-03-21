@@ -1,5 +1,5 @@
 
-import express from "express"
+import express, { Request, Response } from "express"
 import dotenv from "dotenv"
 import bodyParser from "body-parser"
 import cors from "cors"
@@ -43,10 +43,13 @@ app.use('/api/review',reviewRouter)
 app.use('/api/dashboard',dashBoardRoutre)
 
 
+  app.get('/',(req:Request,res:Response)=>{
+           res.json({message:'hello'})
+  })
 
-// app.listen(PORT,()=>{
-//     console.log(`server running on ${PORT}`)
-// })
+app.listen(PORT,()=>{
+    console.log(`server running on ${PORT}`)
+})
 // Start the server locally
 
 // if (process.env.NODE_ENV !== "production") {
