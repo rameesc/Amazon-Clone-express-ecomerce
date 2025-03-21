@@ -35,9 +35,12 @@ app.use('/api/cart', cart_wishlist_1.cartRouter);
 app.use('/api/order', orderRouter_1.orderRouter);
 app.use('/api/review', review_qna_Router_1.reviewRouter);
 app.use('/api/dashboard', dashboardRouter_1.dashBoardRoutre);
-// app.listen(PORT,()=>{
-//     console.log(`server running on ${PORT}`)
-// })
+app.get('/', (req, res) => {
+    res.json({ message: 'hello' });
+});
+app.listen(PORT, () => {
+    console.log(`server running on ${PORT}`);
+});
 // Start the server locally
 // if (process.env.NODE_ENV !== "production") {
 //     app.listen(PORT, () => {
