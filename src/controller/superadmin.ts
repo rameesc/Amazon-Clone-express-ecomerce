@@ -1111,7 +1111,7 @@ export const category=async(req:Request,res:Response)=>{
        
         const category= await Category.findOne({displayName});
          
-         const filePath=`public/uploads/category/${req.file?.filename}`
+         const filePath=`/public/uploads/category/${req.file?.filename}`
 
 
        

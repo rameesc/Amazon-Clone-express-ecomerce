@@ -717,7 +717,7 @@ const category = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { brands, parent_id, displayName, systemName, category_id } = req.body;
         const category = yield Category_1.Category.findOne({ displayName });
-        const filePath = `public/uploads/category/${(_a = req.file) === null || _a === void 0 ? void 0 : _a.filename}`;
+        const filePath = `/public/uploads/category/${(_a = req.file) === null || _a === void 0 ? void 0 : _a.filename}`;
         if (category_id) {
             let updateCategory = yield Category_1.Category.findOne({ _id: category_id });
             if (!category) {
