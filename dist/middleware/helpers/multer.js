@@ -47,7 +47,7 @@ const storageBanner = multer_1.default.diskStorage({
 //product image
 const productImagesUpload = multer_1.default.diskStorage({
     destination: ((req, file, cb) => {
-        cb(null, 'public/uploads/product');
+        cb(null, './public/uploads/product');
     }),
     filename: ((req, file, cb) => {
         cb(null, file.fieldname + '-' + req.admin._id + '-' + Date.now() + '-' + path_1.default.extname(file.originalname));
@@ -56,7 +56,7 @@ const productImagesUpload = multer_1.default.diskStorage({
 //category image
 const categoryImagesUpload = multer_1.default.diskStorage({
     destination: ((req, file, cb) => {
-        cb(null, 'public/uploads/category');
+        cb(null, './public/uploads/category');
     }),
     filename: ((req, file, cb) => {
         cb(null, file.fieldname + '-' + Date.now() + '-' + path_1.default.extname(file.originalname));

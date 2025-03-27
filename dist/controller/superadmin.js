@@ -40,7 +40,7 @@ const geoLocation = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                 type: "point",
                 coordinates: [lat, long]
             };
-            yield adminschema_1.Admin.findByIdAndUpdate(superadmin._id, exports.geoLocation);
+            yield adminschema_1.Admin.findByIdAndUpdate(superadmin._id, geolocation);
             res.json({ superadmin, status: true });
             return;
         }
@@ -117,8 +117,6 @@ exports.getShippingData = getShippingData;
 const banner = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { productId, link } = req.body;
-        console.log(req.body, 'banner');
-        console.log(req.file, 'banner');
         if (!req.file) {
             res.json({ message: "banner image required", status: false });
             return;
@@ -387,7 +385,7 @@ exports.getAllDispatchers = getAllDispatchers;
 const addDispatcher = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email } = req.body;
-        const { success, data, error } = schema_1.dispatcherValidate.safeParse(req.body);
+        const { success, error } = schema_1.dispatcherValidate.safeParse(req.body);
         if (!success) {
             res.json({ message: error === null || error === void 0 ? void 0 : error.errors[0].message });
             return;
@@ -571,7 +569,6 @@ exports.flipAdminWareHouseApprovel = flipAdminWareHouseApprovel;
 // admin account verification
 const flipAdminAccountApproval = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { a_id } = req.params;
         const { email } = req.body;
         let adminAccount = yield adminschema_1.Admin.findOne({ email })
             .populate("businessInfo")
@@ -624,7 +621,6 @@ exports.flipAdminAccountApproval = flipAdminAccountApproval;
 const blockUnblockAdminAccount = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email } = req.body;
-        console.log(email);
         let admin = yield adminschema_1.Admin.findOne({ email })
             .select('-password -salt -resetPasswordLink -emailVerifyLink');
         if (!admin) {
@@ -720,8 +716,6 @@ const category = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c, _d;
     try {
         const { brands, parent_id, displayName, systemName, category_id } = req.body;
-        console.log(req.body);
-        console.log(req.file);
         const category = yield Category_1.Category.findOne({ displayName });
         const filePath = `public/uploads/category/${(_a = req.file) === null || _a === void 0 ? void 0 : _a.filename}`;
         if (category_id) {
@@ -998,8 +992,8 @@ const getProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const { createdAt, updatedAt, price, status, keyword, outofstock } = req.query;
         let query = {};
         let sortFactor = {};
-        if (createdAt && (createdAt === 'asc' || createdAt === 'desc'))
-            sortFactor = { createdAt };
+        if (createdAt && (createdAt === '-1' || createdAt === '1'))
+            sortFactor = { createdAt: createdAt == '1' ? "asc" : "desc" };
         if (updatedAt && (updatedAt === 'asc' || updatedAt === 'desc'))
             sortFactor = { updatedAt };
         if (price && (price === '-1' || price === '1'))

@@ -63,7 +63,7 @@ const storageBanner = multer.diskStorage({
 const productImagesUpload = multer.diskStorage({
     destination:((req,file,cb)=>{
 
-        cb(null,'public/uploads/product')
+        cb(null,'./public/uploads/product')
 
         
     }),
@@ -78,7 +78,7 @@ const productImagesUpload = multer.diskStorage({
 const categoryImagesUpload = multer.diskStorage({
     destination:((req,file,cb)=>{
 
-        cb(null,'public/uploads/category')
+        cb(null,'./public/uploads/category')
 
         
     }),
