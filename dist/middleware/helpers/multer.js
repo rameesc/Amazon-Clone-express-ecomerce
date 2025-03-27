@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.uploadCategoryImage = exports.uploadProductsImages = exports.uploadBannerPhoto = exports.uploadAdminDoc = exports.uploadAdminphoto = exports.uploadUserPhoto = void 0;
 const path_1 = __importDefault(require("path"));
 const multer_1 = __importDefault(require("multer"));
+const fs_1 = __importDefault(require("fs"));
 //user
 const storageByUser = multer_1.default.diskStorage({
     destination: ((req, file, cb) => {
@@ -56,7 +57,11 @@ const productImagesUpload = multer_1.default.diskStorage({
 //category image
 const categoryImagesUpload = multer_1.default.diskStorage({
     destination: ((req, file, cb) => {
-        cb(null, './public/uploads/category');
+        const uploadPath = path_1.default.join(__dirname, '../public/uploads/category');
+        if (!fs_1.default.existsSync(uploadPath)) {
+            fs_1.default.mkdirSync(uploadPath, { recursive: true });
+        }
+        cb(null, uploadPath);
     }),
     filename: ((req, file, cb) => {
         cb(null, file.fieldname + '-' + Date.now() + '-' + path_1.default.extname(file.originalname));
