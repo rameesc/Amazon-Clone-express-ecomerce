@@ -17,7 +17,7 @@ import { SuggestKeyword } from "../models/suggestKeyword";
 import { District } from "../models/districts";
 import { Remark } from "../models/Remark";
 import { ProductBrand } from "../models/productBrand";
-import path from 'path'
+
 import { removeImageFile } from "../middleware/helpers/fileRemover";
 
 
@@ -36,7 +36,7 @@ export const geoLocation=async(req:Request,res:Response)=>{
                 coordinates:[lat,long]
             }
 
-            await Admin.findByIdAndUpdate(superadmin._id,geoLocation)
+            await Admin.findByIdAndUpdate(superadmin._id,geolocation)
 
             res.json({superadmin,status:true})
             return
@@ -149,8 +149,7 @@ export const banner =async(req:Request,res:Response)=>{
     try{
         const {productId,link}=req.body
 
-        console.log(req.body,'banner')
-        console.log(req.file,'banner')
+       
 
         if(!req.file){
 
@@ -575,7 +574,7 @@ export const addDispatcher=async(req:Request,res:Response)=>{
 
         const {email}=req.body
 
-      const {success,data,error}=  dispatcherValidate.safeParse(req.body);
+      const {success,error}=  dispatcherValidate.safeParse(req.body);
 
       if(!success){
 
@@ -873,7 +872,7 @@ export const  flipAdminAccountApproval=async(req:Request,res:Response)=>{
 
     try{
 
-        const {a_id}=req.params;
+      
         const {email}=req.body
         
       
@@ -957,7 +956,7 @@ export const blockUnblockAdminAccount =async(req:Request,res:Response)=>{
 
         
         const {email}=req.body
-        console.log(email)
+        
 
         let admin = await Admin.findOne({email})
         
@@ -1109,17 +1108,9 @@ export const category=async(req:Request,res:Response)=>{
             category_id
         }=req.body
 
-        console.log(req.body)
-        console.log(req.file)
-
        
-        
-       
-      
         const category= await Category.findOne({displayName});
-            
-        
-
+         
          const filePath=`public/uploads/category/${req.file?.filename}`
 
 
@@ -1564,7 +1555,7 @@ export const getProduct=async(req:Request<{},{},{},MyQuery>,res:Response)=>{
 
         let sortFactor = { };
 
-        if (createdAt && (createdAt === 'asc' || createdAt === 'desc')) sortFactor = { createdAt }
+        if (createdAt && (createdAt === '-1' || createdAt === '1')) sortFactor = { createdAt:createdAt=='1'?"asc":"desc" }
         if (updatedAt && (updatedAt === 'asc' || updatedAt === 'desc')) sortFactor = { updatedAt }
         if (price && (price === '-1' || price === '1')) sortFactor = { price: price == "1" ? 1 : -1 } as {price:number}
 
