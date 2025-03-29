@@ -9,7 +9,7 @@ const user_auth_1 = require("../controller/user_auth");
 const user_1 = require("../controller/user");
 const admin_auth_1 = require("../controller/admin_auth");
 exports.userAuth = express_1.default.Router();
-exports.userAuth.post(`/signup`, user_auth_1.signup);
+exports.userAuth.post("/signup", user_auth_1.signup);
 exports.userAuth.post("/emailverify", user_auth_1.emailVerifyLink);
 exports.userAuth.post('/signin', user_auth_1.signin);
 exports.userAuth.post('/google', user_auth_1.loginWithGoogle);

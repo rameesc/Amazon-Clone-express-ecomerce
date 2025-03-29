@@ -35,7 +35,6 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
         const hashPassword = yield bcryptjs_1.default.hash(password, 10);
         const token = jsonwebtoken_1.default.sign({ email }, process.env.JWT_EMAIL_VERIFICATION_KEY, { expiresIn: process.env.EMAIL_TOKEN_EXPIRE_TIME });
-        console.log(token);
         yield userModelsSchema_1.User.create({
             email,
             emailVerifyLink: token,
@@ -88,15 +87,7 @@ exports.emailVerifyLink = emailVerifyLink;
 const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = req.body;
-        console.log(email, password);
-        const { success, error } = schema_1.signupValidate.safeParse(req.body);
-        console.log(success);
-        // if(!success){
-        //    res.json({message:error?.errors[0].message,status:false})
-        //    return
-        // }
         let user = yield userModelsSchema_1.User.findOne({ email });
-        console.log(user);
         if (!user) {
             res.json({ message: "Email or password is invalid", status: false });
             return;
@@ -167,6 +158,7 @@ const loginWithGoogle = (req, res) => __awaiter(void 0, void 0, void 0, function
         const isUser = yield userModelsSchema_1.User.findOne({ email });
         if (isUser) {
             res.json({ message: "email already taken", status: false });
+            return;
         }
         const createNewUser = yield userModelsSchema_1.User.create({
             name,
