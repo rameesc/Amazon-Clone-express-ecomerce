@@ -45,7 +45,7 @@ export const signup=async(req:Request,res:Response)=>{
         process.env.JWT_EMAIL_VERIFICATION_KEY!,
         {expiresIn:process.env.EMAIL_TOKEN_EXPIRE_TIME}
      )
-     console.log(token)
+    
 
      await User.create({
         email,
@@ -129,23 +129,11 @@ export const signin=async(req:Request,res:Response)=>{
 
         const {email,password}=req.body;
 
-        console.log(email,password)
-
-
-        const {success,error}=signupValidate.safeParse(req.body)
-        console.log(success)
-
-     
-
-        // if(!success){
-        //    res.json({message:error?.errors[0].message,status:false})
-        //    return
-   
-        // }
+       
 
         let user=await User.findOne({email})
 
-        console.log(user)
+       
 
 
         if(!user){
@@ -253,6 +241,7 @@ export  const loginWithGoogle=async(req:Request,res:Response)=>{
 
         if(isUser){
             res.json({message:"email already taken",status:false})
+            return
         }
 
         const createNewUser=await User.create({
