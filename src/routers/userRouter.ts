@@ -1,6 +1,16 @@
 import express from "express";
 import { auth } from "../controller/user_auth";
-import { addAddress, editeAddress, getProfile, getSingleAddress, getUserAddres, getUserByEmail, profile, updateProfile, uploadUserProfilePhoto } from "../controller/user";
+import { 
+    addAddress, 
+    editeAddress, 
+    getProfile, 
+    getSingleAddress, 
+    getUserAddres, 
+    getUserByEmail, 
+    profile, 
+    updateProfile, 
+    uploadUserProfilePhoto } from "../controller/user";
+    
 import { uploadUserPhoto } from "../middleware/helpers/multer";
 
 export const userRouter=express.Router()
