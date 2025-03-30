@@ -119,14 +119,14 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             res.json({ message: "Invalid email and password", status: false });
             return;
         }
-        console.log(process.env.ADMIN_CRM_ROUTE);
+        console.log(process.env.ADMIN_CRM_ROUTE, 'hello url');
         if (!(isAdmin === null || isAdmin === void 0 ? void 0 : isAdmin.emailVerifyLink)) {
             const token = jsonwebtoken_1.default.sign({ email }, process.env.JWT_EMAIL_VERIFICATION_KEY, { expiresIn: process.env.EMAIL_TOKEN_EXPIRE_TIME });
             isAdmin.emailVerifyLink = token;
             yield isAdmin.save();
             const subject = "Verify email";
             const text = "verify email";
-            const html = `<p>Hi , ${isAdmin === null || isAdmin === void 0 ? void 0 : isAdmin.name} </p></br>
+            const html = `<p>Hi , ${isAdmin === null || isAdmin === void 0 ? void 0 : isAdmin.name}-${process.env.ADMIN_CRM_ROUTE} </p></br>
                                    <a href="${process.env.ADMIN_CRM_ROUTE}/email-verify?token=${token}">Click me to verify email </a> `;
             const { success: emailSuccess } = yield (0, sendEmail_1.sendEmail)(email, subject, text, html);
             if (emailSuccess) {
