@@ -119,6 +119,7 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             res.json({ message: "Invalid email and password", status: false });
             return;
         }
+        console.log(process.env.ADMIN_CRM_ROUTE);
         if (!(isAdmin === null || isAdmin === void 0 ? void 0 : isAdmin.emailVerifyLink)) {
             const token = jsonwebtoken_1.default.sign({ email }, process.env.JWT_EMAIL_VERIFICATION_KEY, { expiresIn: process.env.EMAIL_TOKEN_EXPIRE_TIME });
             isAdmin.emailVerifyLink = token;

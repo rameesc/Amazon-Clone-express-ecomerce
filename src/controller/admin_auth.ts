@@ -171,7 +171,8 @@ export const signin=async(req:Request,res:Response)=>{
             return
 
         }
-
+        
+        console.log(process.env.ADMIN_CRM_ROUTE)
 
       
 
