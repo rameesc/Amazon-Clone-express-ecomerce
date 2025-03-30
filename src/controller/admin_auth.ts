@@ -172,7 +172,7 @@ export const signin=async(req:Request,res:Response)=>{
 
         }
         
-        console.log(process.env.ADMIN_CRM_ROUTE,'hello url')
+       
 
       
 
@@ -190,7 +190,7 @@ export const signin=async(req:Request,res:Response)=>{
 
              const subject="Verify email"
              const text="verify email"
-             const html=`<p>Hi , ${isAdmin?.name}-${process.env.ADMIN_CRM_ROUTE} </p></br>
+             const html=`<p>Hi , ${isAdmin?.name} </p></br>
                                    <a href="${process.env.ADMIN_CRM_ROUTE}/email-verify?token=${token}">Click me to verify email </a> `
         
             const {success:emailSuccess}=await sendEmail(email,subject,text,html)

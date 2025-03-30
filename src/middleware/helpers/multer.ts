@@ -79,7 +79,7 @@ const productImagesUpload = multer.diskStorage({
 const categoryImagesUpload = multer.diskStorage({
     destination:((req,file,cb)=>{
 
-        const uploadPath = path.join(__dirname,'../public/uploads/category')
+        const uploadPath = path.join(__dirname,'./public/uploads/category')
 
         if(!fs.existsSync(uploadPath)){
             fs.mkdirSync(uploadPath, {recursive:true})
