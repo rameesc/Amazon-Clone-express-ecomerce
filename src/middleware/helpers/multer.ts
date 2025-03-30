@@ -1,9 +1,18 @@
 
 import path from "path"
 import multer from "multer"
-import fs from 'fs'
+import fs from "fs"
 
 
+// Helper function to ensure directory exists
+const ensureDirectoryExists = (directoryPath:string) => {
+    if (!fs.existsSync(directoryPath)) {
+      fs.mkdirSync(directoryPath, { recursive: true });
+    }
+  };
+
+  // Base upload path (using absolute path for reliability)
+const baseUploadPath = path.join(process.cwd(), 'public', 'uploads');
 
 //user
 
@@ -79,7 +88,9 @@ const productImagesUpload = multer.diskStorage({
 const categoryImagesUpload = multer.diskStorage({
     destination:((req,file,cb)=>{
 
-        const uploadPath = path.join(__dirname,'./public/uploads/category')
+        const uploadPath = path.join(baseUploadPath,'category')
+        ensureDirectoryExists(uploadPath);
+        
 
        
 

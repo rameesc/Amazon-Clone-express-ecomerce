@@ -15,6 +15,8 @@ import { cartRouter } from "./routers/cart_wishlist"
 import { orderRouter } from "./routers/orderRouter"
 import { reviewRouter } from "./routers/review_qna_Router"
 import { dashBoardRoutre } from "./routers/dashboardRouter"
+import path from "path"
+
 
 
 dotenv.config()
@@ -25,7 +27,10 @@ dbConnection()
 
 
 const app=express()
-app.use('/public',express.static('public'))
+
+const publicPath=path.join(process.cwd(),'public')
+
+app.use('/public',express.static(publicPath))
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 app.use(cors())
