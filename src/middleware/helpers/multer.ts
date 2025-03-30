@@ -81,9 +81,7 @@ const categoryImagesUpload = multer.diskStorage({
 
         const uploadPath = path.join(__dirname,'./public/uploads/category')
 
-        if(!fs.existsSync(uploadPath)){
-            fs.mkdirSync(uploadPath, {recursive:true})
-        }
+       
 
         cb(null,uploadPath)
 
@@ -109,4 +107,4 @@ export const uploadBannerPhoto=multer({storage:storageBanner,limits:limits}).sin
 
 export const uploadProductsImages=multer({storage:productImagesUpload}).array("productImages",4)
 
-export const uploadCategoryImage=multer({storage:categoryImagesUpload,limits:limits}).single('category')
+export const uploadCategoryImage=multer({storage:categoryImagesUpload,limits:limits}).single("category")
