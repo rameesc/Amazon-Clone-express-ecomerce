@@ -19,11 +19,11 @@ const userSchema=new mongoose.Schema({
         type:String,
         trim:true
     },
-    userId:{
-        type:String,
-        trim:true,
-        unique:true
-    },
+    // userId:{
+    //     type:String,
+    //     trim:true,
+    //     unique:true
+    // },
     loginDomain:{
         type:String,
         default:"system",
