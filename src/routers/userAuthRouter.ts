@@ -18,7 +18,7 @@ import { checkAdminSignin, isSuperadmin } from "../controller/admin_auth"
 export const userAuth=express.Router()
 
 
-userAuth.post("/signup", signup)
+userAuth.post("/signup",signup)
 userAuth.post("/emailverify",emailVerifyLink)
 userAuth.post('/signin',signin)
 userAuth.post('/google',loginWithGoogle)
