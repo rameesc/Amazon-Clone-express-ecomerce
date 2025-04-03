@@ -32,9 +32,6 @@ export const signup=async(req:Request,res:Response)=>{
 
      if(isUser){
 
-
-       
-
         res.json({message:"Email is taken!",status:false})
         return
      }
@@ -48,9 +45,9 @@ export const signup=async(req:Request,res:Response)=>{
     
 
      await User.create({
-        email,
+        email:email,
         emailVerifyLink:token,
-        name,
+        name:name,
         password:hashPassword
 
      })
@@ -77,6 +74,13 @@ export const signup=async(req:Request,res:Response)=>{
         if(error instanceof Error){
 
             if(error.message){
+
+                res.json({
+                    message:error?.message,
+                    status:false
+                })
+
+                return 
 
             }
         }
